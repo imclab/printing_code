@@ -12,6 +12,7 @@ boolean saveImage;
 ArrayList<Figure> rects;
 ColorTheoryStrategy s;
 ColorList colorList;
+ColorRange redPinks;
 
 void setup() {
   print_width = 22; 
@@ -20,7 +21,10 @@ void setup() {
   size(round(print_width * make_bigger), round(print_height * make_bigger));
 
   saveImage = false;  
-
+  
+  s = ColorTheoryRegistry.getRegisteredStrategies().get(7);    
+  redPinks = new ColorRange(new FloatRange(0.93, 0.97), new FloatRange(0.8, 0.95), new FloatRange(0.8, 1), "red_pink");
+  
   blendMode(MULTIPLY);
   //BLEND - linear interpolation of colours: C = A*factor + B. This is the default blending mode.
   //ADD - additive blending with white clip: C = min(A*factor + B, 255)
@@ -66,27 +70,20 @@ void draw() {
 }
 
 void generate() {
-    
-  ColorRange redPinks = new ColorRange(new FloatRange(0.9, 0.95), new FloatRange(0.8, 0.95), new FloatRange(0.8, 1), "red_pink");
-  redPinks.addBrightnessRange(new FloatRange(0.3, 0.35));
+  TColor redPink = redPinks.getColor();
+  colorList = ColorList.createUsingStrategy(s, redPink);
   
-  ColorRange blueGreens = new ColorRange(new FloatRange(0.43, 0.5), new FloatRange(0.8, 0.95), new FloatRange(0.8, 1), "red_pink");
-  blueGreens.addBrightnessRange(new FloatRange(0.3, 0.35));
-  
-  ColorRange yellowOranges = new ColorRange(new FloatRange(0.1, 0.2), new FloatRange(0.8, 0.95), new FloatRange(0.8, 1), "yellow_orange");
+  ColorRange yellows = new ColorRange(new FloatRange(colorList.get(1).hue() - 0.06, colorList.get(1).hue() + 0.02), 
+                                            new FloatRange(0.9, 0.95), 
+                                            new FloatRange(0.8, 1), "yellows");
+  ColorRange blues = new ColorRange(new FloatRange(colorList.get(2).hue() - 0.02, colorList.get(2).hue() + 0.02), 
+                                            new FloatRange(0.8, 0.95), 
+                                            new FloatRange(0.8, 1), "blues");
+  blues.addBrightnessRange(new FloatRange(0.3, 0.35));
   
   rects.get(0).c = redPinks.getColor();
-  rects.get(1).c = blueGreens.getColor();
-  rects.get(2).c = yellowOranges.getColor();
-  
-//  s = ColorTheoryRegistry.getRegisteredStrategies().get(9);
-//  //8: compound
-//  //9: complementary
-//  TColor c = new ColorRange(new FloatRange(0.9, 0.95), new FloatRange(0.8, 0.95), new FloatRange(0.8, 1), "red_pink").getColor;
-//  colorList = ColorList.createUsingStrategy(s, col);
-//   for (int i = 0; i < rects.size(); i++) {
-//   rects.get(i).c = colorList.get(i);
-//   }   
+  rects.get(1).c = blues.getColor();
+  rects.get(2).c = yellows.getColor();
   
   for (int i = 0; i < rects.size(); i++) {
     rects.get(i).generate();
