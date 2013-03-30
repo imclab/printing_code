@@ -23,7 +23,7 @@ void setup() {
   saveImage = false;  
   
   s = ColorTheoryRegistry.getRegisteredStrategies().get(7);    
-  redPinks = new ColorRange(new FloatRange(0.93, 0.97), new FloatRange(0.8, 0.95), new FloatRange(0.8, 1), "red_pink");
+  
   
   blendMode(MULTIPLY);
   //BLEND - linear interpolation of colours: C = A*factor + B. This is the default blending mode.
@@ -70,13 +70,14 @@ void draw() {
 }
 
 void generate() {
+  redPinks = new ColorRange(new FloatRange(0.95, 0.97), new FloatRange(0.8, 0.95), new FloatRange(0.8, 1), "red_pink");
   TColor redPink = redPinks.getColor();
   colorList = ColorList.createUsingStrategy(s, redPink);
   
-  ColorRange yellows = new ColorRange(new FloatRange(colorList.get(1).hue() - 0.06, colorList.get(1).hue() + 0.02), 
-                                            new FloatRange(0.9, 0.95), 
+  ColorRange yellows = new ColorRange(new FloatRange(colorList.get(1).hue() - 0.06, colorList.get(1).hue()), 
+                                            new FloatRange(0.8, 0.95), 
                                             new FloatRange(0.8, 1), "yellows");
-  ColorRange blues = new ColorRange(new FloatRange(colorList.get(2).hue() - 0.02, colorList.get(2).hue() + 0.02), 
+  ColorRange blues = new ColorRange(new FloatRange(colorList.get(2).hue() - 0.06, colorList.get(2).hue()), 
                                             new FloatRange(0.8, 0.95), 
                                             new FloatRange(0.8, 1), "blues");
   blues.addBrightnessRange(new FloatRange(0.3, 0.35));
