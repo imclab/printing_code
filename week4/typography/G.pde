@@ -8,6 +8,10 @@ class G extends Letter {
   void setup(){
     radius = 2 * unit;
   }
+  
+  int getWidth(){
+    return radius*2;
+  } 
 
   void drawSpecific() {  
     translate(radius, radius);
@@ -29,8 +33,7 @@ class G extends Letter {
     for (int i = 0; i <= numberOfLines; i++) {//
       float separation = radius/(float)numberOfLines;
       float r = separation * i;
-
-
+      
       PVector pTop = new PVector(r, 2);      
       PVector pC1 = new PVector(r, -10);
       PVector pBottom = new PVector(0, radius);

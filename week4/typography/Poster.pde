@@ -21,13 +21,17 @@ class Poster extends Canvas{
     generate();
   }
   
-  void generate(){
+  void generate(){    
+    int cols = 5;
     for(int i = 0; i < figures.size(); i++){
       Letter letter = (Letter)figures.get(i);
-      letter.setUnit(ceil(random(w(0), w(1))));
-      letter.x = x((int)random(2,4));
-      letter.y = y((int)random(i,i+2));
-      letter.rotate = random(0, 2*PI);
+      int letterUnit = w(1)/5;
+      letter.setUnit(letterUnit);
+      
+      int xPos = x((i) % cols);
+      int yPos = y((int)(i /cols));
+      letter.x = xPos + (w(1) - letter.getWidth())/2;//centered
+      letter.y = yPos;//centered   // 
     }
   
   }

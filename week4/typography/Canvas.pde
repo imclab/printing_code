@@ -1,13 +1,26 @@
 class Canvas {
   ArrayList<Figure> figures;
   int w, h;
+  boolean drawGrid;
+  int cols, rows;
 
   Canvas() {
     w = width;
     h = height;
+    drawGrid = true;
+    cols = 5;
+    rows = 5;
   }
-  
+
   void draw() {
+    if (drawGrid) {
+      for (int i=0; i < cols; i++) {
+        line(x(i), 0, x(i), height);
+      }
+      for (int j=0; j < rows; j++) {
+        line(0, y(j), width, y(j));
+      }
+    }
     for (int i = 0; i < figures.size(); i++) {
       figures.get(i).draw();
     }
@@ -21,11 +34,11 @@ class Canvas {
 
   //Grid
   int x(int gridPosX) {
-    return w/12 * gridPosX;
+    return w/cols * gridPosX;
   }
 
   int y(int gridPosY) {
-    return h/12 * gridPosY;
+    return h/rows * gridPosY;
   }
 
   int w(int units) {
@@ -35,50 +48,49 @@ class Canvas {
   int h(int units) {
     return y(units);
   }
-  
-  void moveLeft(){
+
+  void moveLeft() {
     for (int i = 0; i < figures.size(); i++) {
       figures.get(i).x -= 5;
     }
   }
-  
-  void moveRight(){
+
+  void moveRight() {
     for (int i = 0; i < figures.size(); i++) {
       figures.get(i).x += 5;
     }
   }
-  
-  void moveUp(){
+
+  void moveUp() {
     for (int i = 0; i < figures.size(); i++) {
       figures.get(i).y -= 5;
     }
   }
-  
-  void moveDown(){
+
+  void moveDown() {
     for (int i = 0; i < figures.size(); i++) {
       figures.get(i).y += 5;
     }
   }
-  
-  void bigger(){
+
+  void bigger() {
     for (int i = 0; i < figures.size(); i++) {
       figures.get(i).w--;
       figures.get(i).h--;
     }
   }
-  
-  void smaller(){
+
+  void smaller() {
     for (int i = 0; i < figures.size(); i++) {
       figures.get(i).w++;
       figures.get(i).h++;
     }
   }
-  
-  void nextMode(){
+
+  void nextMode() {
     for (int i = 0; i < figures.size(); i++) {
       figures.get(i).nextMode();
     }
   }
-  
 }
 

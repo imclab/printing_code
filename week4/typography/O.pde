@@ -11,6 +11,10 @@ class O extends Letter {
     separationRatio = 2;
   }
   
+  int getWidth(){
+    return radius*2;
+  } 
+  
   void drawSpecific() {  
     //rect(0, 0, 100, 100);
     translate(radius, radius);

@@ -19,6 +19,8 @@ class Letter extends Figure{
   void setup(){ //to be overriden by subclasses
   }
   
+ 
+  
   
   PVector arcVertexes(int start, int stop, int shapeRadius, boolean clockwise){
     PVector lastPoint = new PVector(); 
@@ -27,7 +29,7 @@ class Letter extends Figure{
     int vertexDegree = abs(start-stop) / numVertices;
     
     
-    int step = 1;//should adjust. need less vertixes.
+    int step = 1;//should adjust. need less vertices.
     if (clockwise) {
       //for (int alpha = start; alpha <= stop; alpha += step)
       for (int i = 0; i <= numVertices; i++)

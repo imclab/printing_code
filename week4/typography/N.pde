@@ -5,7 +5,11 @@ class N extends Letter {
   
   void setup(){
     h = 4 * unit;
-    w = ceil(6/10.0 * h);
+    w = getWidth();
+  }
+  
+  int getWidth(){
+    return ceil(6/10.0 * h);
   }
   
   void drawSpecific() {  

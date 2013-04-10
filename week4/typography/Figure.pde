@@ -25,6 +25,10 @@ class Figure {
   void generate() {
     
   }
+  
+  int getWidth(){//to be overriden by subclasses
+    return 0;
+  } 
 
   void draw() {   
     strokeWeight(strokeWeight);

@@ -6,6 +6,11 @@ class S extends Letter {
   void setup(){
     radius = unit;
   }
+  
+  int getWidth(){
+    return radius*2 + radius/2;
+  }
+  
   void drawSpecific() {  
     //rect(0, 0, 100, 100);
     translate(radius, radius); 
